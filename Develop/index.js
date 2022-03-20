@@ -113,11 +113,16 @@ const promptUser = ()=> {
 }
 
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+promptUser()
+    .then(projectData => {
+           const readMe = generateMarkdown(projectData)
+            fs.writeFile('./README.md', readMe, err => 
+            {
+        
+            if(err) throw err; 
+            console.log('ReadMe file complete! Check out README.md to see the output!')
+            })
 
-// TODO: Create a function to initialize app
-function init() {}
-
-// Function call to initialize app
-init();
+         console.log(projectData);
+        })
+const generateMarkdown = require('./utils/generateMarkdown.js')
