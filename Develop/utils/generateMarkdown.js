@@ -37,10 +37,39 @@ const renderLicenseSection = license=> {
 }
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
+module.exports = templateMarkdown => {
+  console.log(templateMarkdown)
+  return `
+  # **${templateMarkdown.projectName}**
+
+  ## **Description:**
+ **${templateMarkdown.proDescrip}**
+
+  ## Table of Contents:
+   - [Installation](#installion)
+   - [Usage](#usage)
+   - [License](#license)
+   - [Contribution](#contribution)
+
+  ### *Installations:*
+
+  _${templateMarkdown.installation}_
+
+  ### *Usage:*
+  _${templateMarkdown.usage}_
+
+  ### *License*
+  ${renderLicenseSection(templateMarkdown.license)}
+  
+  ### *Contribution:*
+  _${templateMarkdown.contribution}_
+
+  ### *Tests:*
+  _${templateMarkdown.test}_
+
+  #### Questions:
+ - Email: ${templateMarkdown.email}
+ - https://github.com/${templateMarkdown.gitHub}/
 
 `;
 }
-
-module.exports = generateMarkdown;
