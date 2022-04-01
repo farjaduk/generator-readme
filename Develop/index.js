@@ -9,14 +9,14 @@ const promptUser = ()=> {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'Name',
-            message: 'What is the Name of Your Project?',
+            name: 'projectName',
+            message: 'What is the name of your project?',
             validate: projectNameInput =>{
                 if (projectNameInput){
                     return true
                 }
                 else{
-                    console.log('Please Enter Your Project Name!')
+                    console.log('Please enter your project name!')
                     return false
                 }
             }
@@ -24,14 +24,14 @@ const promptUser = ()=> {
 
         {
             type: 'input',
-            name: 'projectDes',
+            name: 'proDescrip',
             message: 'Project description:',
             validate: descripInput => {
                 if (descripInput){
                     return true
                 }
                 else{
-                    console.log('Please Enter a Desription of the Project!')
+                    console.log('Please enter a desription for the project!')
                     return false
                 }
             }
@@ -40,35 +40,35 @@ const promptUser = ()=> {
 
         {
             type: 'input',
-            name: 'install',
-            message: 'Please Enter Installation Instructions:'
+            name: 'installation',
+            message: 'Enter installation instructions:'
         },
 
         {
             type: 'input',
             name: 'usage',
-            message: 'Please Enter Usage Information:'
+            message: 'Enter usage information:'
 
         },
         
         {
             type: 'input',
             name: 'test',
-            message:'Please Enter Testing Instructions:'
+            message:'Enter testing instructions:'
 
         },
 
         {
             type: 'input',
             name: 'contribution',
-            message:'Please Enter Contribution Guidelines:'
+            message:'Enter contribution guidelines:'
 
         },
 
         {   
             type: 'checkbox',
             name: 'license',
-            message: 'Please Choose a Liscence:',
+            message: 'Please choose a liscence:',
             choices: ['mit', 'agpl-3.0','gpl-3.0', 'apache-2.0']
 
         },
@@ -76,13 +76,13 @@ const promptUser = ()=> {
         {   
             type: 'input',
             name: 'email',
-            message: 'Please Enter Your Email!:',
+            message: 'Please enter your Email:',
             validate: emailInput =>{
                 if (emailInput){
                     return true
                 }
                 else{
-                    console.log('Please Enter Your Project Name!')
+                    console.log('Please enter your project name!')
                     return false
                 }
             }
@@ -94,13 +94,13 @@ const promptUser = ()=> {
         {   
             type: 'input',
             name: 'gitHub',
-            message: 'Please Enter Your GitHub Username:',
+            message: 'Enter your GitHub username:',
             validate: GitHubInput =>{
                 if (GitHubInput){
                     return true
                 }
                 else{
-                    console.log('Please Enter Your Project Name!')
+                    console.log('Please enter your project name!')
                     return false
                 }
             }
@@ -113,11 +113,18 @@ const promptUser = ()=> {
 }
 
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+promptUser()
+    .then(projectData => {
+           const readMe = generateMarkdown(projectData)
+            fs.writeFile('./README.md', readMe, err => 
+            {
+        
+            if(err) throw err; 
+            console.log('ReadMe file complete! Check out README.md to see the output!')
+            })
 
-// TODO: Create a function to initialize app
-function init() {}
+         console.log(projectData);
+        })
+const generateMarkdown = require('./utils/generateMarkdown.js')
 
-// Function call to initialize app
-init();
+   
